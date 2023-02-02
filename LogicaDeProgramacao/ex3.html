@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 3</title>
+</head>
+<body>
+    Digite o número de vezes: <input type="number" id="inpVezes"> 
+    <button onclick="gerar()">Gerar</button> <br>
+    <output id="outResultado"></output>
+    <script>
+        function gerar(){
+            let vezes = document.getElementById("inpVezes").value
+            let fibonacci = []
+            let resultado = 0
+            let anterior = 0
+            let proximo = 1
+
+            if(vezes<0){
+                alert("Digite um número real.")
+                return
+            }
+            for(let i=0; i<vezes; i++){
+                fibonacci.push(proximo)
+                resultado = anterior + proximo
+                anterior = proximo
+                proximo = resultado
+            }
+            document.getElementById("outResultado").innerHTML=fibonacci
+        }
+        
+        
+
+    </script>
+</body>
+</html>

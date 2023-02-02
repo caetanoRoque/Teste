@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD</title>
+</head>
+<body>
+    CPF: <input type="number" id="inpCpf"> |
+    Nome Completo: <input type="text" id="inpNome"> |
+    Idade: <input type="number" id="inpIdade"> |
+    Telefone: <input type="number" id="inpTelefone"> 
+    <button onclick="cadastrar()">Cadastrar</button> <button onclick="alterar()">Alterar</button><br> <br>
+    Digite o CPF que deseja consultar: <input type="number" id="inpCpfConsulta">
+    <button onclick="consultar()">Consultar</button> <br>
+    <output id="outConsulta"></output> <br> <br>
+    Exibir quantidade de pessoas cadastradas <button onclick="gerarRelatorio()">Exibir</button> <br>
+    <output id="outRelatorio"></output> <br> <br>
+    Exibir maior e menor idade e a média <button onclick="gerarRelatorio2()">Exibir</button> <br>
+    <output id="outRelatorio2"></output> <br> <br>
+    
+    Digite o CPF que deseja excluir <input id="inpExcluir"> 
+    <button onclick="excluir()">Excluir</button> <br> <br>
+
+    <button onclick="exibir()">Listar</button><br>
+    <output id="outExibir"></output>
+
+
+    <script>
+        const pessoas = []
+        function cadastrar(){
+            const pessoa = {
+                cpf:document.getElementById("inpCpf").value,
+                nome:document.getElementById("inpNome").value,
+                idade:document.getElementById("inpIdade").value,
+                telefone:document.getElementById("inpTelefone").value
+            }
+            if(pessoa.cpf=="" ||pessoa.nome=="" ||pessoa.idade=="" ||pessoa.telefone==""){
+                alert("Preencha todos os campos.")
+                return
+            }
+            for( a of pessoas){
+                if(a.cpf==pessoa.cpf){
+                    alert("CPF já cadastrado.")
+                    return
+                }
+            }
+            pessoas.push(pessoa)
+        }
+
+        function consultar(){
+            let cpfConsulta=document.getElementById("inpCpfConsulta").value
+            document.getElementById("outConsulta").innerHTML=""
+            if(pessoas.length>=1){
+                for(pessoa of pessoas){
+                    if (pessoa.cpf==cpfConsulta){
+                        document.getElementById("outConsulta").innerHTML= "CPF: " + pessoa.cpf + " |   Nome: " + pessoa.nome + " |   Idade:" + pessoa.idade+ " |   Telefone: " + pessoa.telefone
+                    }else{
+                        alert('CPF não encontrado.')
+                    }
+                }
+            }else{
+                alert("Banco de dados vazio")
+            }
+        }
+
+        function gerarRelatorio(){
+            if(pessoas.length==1){
+                document.getElementById("outRelatorio").innerHTML = "Existe " + pessoas.length+ " pessoa cadastrada."
+            }else{
+                document.getElementById("outRelatorio").innerHTML = "Existem " + pessoas.length+ " pessoas cadastradas."
+            }
+        }
+
+        function gerarRelatorio2(){
+            let maior = pessoas[0].idade
+            let menor = pessoas[0].idade
+            let soma = 0
+            for(i of pessoas){
+                soma=parseInt(i.idade) + soma
+                if(i.idade<menor){
+                    menor=i.idade
+                }
+                if(i.idade>maior){
+                    maior=i.idade
+                }
+                // console.log(soma)
+            }
+            media=soma/pessoas.length
+            document.getElementById("outRelatorio2").innerHTML=`Menor: ${menor} | Maior: ${maior} | Média: ${media}`
+        }
+
+        function excluir(){
+            let cpfExcluir = document.getElementById("inpExcluir").value
+            for(e of pessoas){
+                if(e.cpf==cpfExcluir){
+                    pessoas.splice(pessoas.indexOf(e.cpf), 1)
+                }
+            }
+        }
+
+        function exibir(){
+            if(pessoas.length<1){
+                alert("Nenhum cadastro realizado.")
+            }else{
+                document.getElementById("outExibir").innerHTML=""
+                for(e of pessoas){
+                    
+                    document.getElementById("outExibir").innerHTML+="CPF: " + e.cpf + " |   Nome: " + e.nome + " |   Idade:" + e.idade+ " |   Telefone: " + e.telefone+ "<br>"
+                }
+            }
+        }
+
+        function alterar(){
+            let cpf=document.getElementById("inpCpf").value
+            if(pessoas.length>=1){
+                for(pessoa of pessoas){
+                    if (pessoa.cpf==cpf){
+                        pessoa.nome=document.getElementById("inpNome").value,
+                        pessoa.idade=document.getElementById("inpIdade").value,
+                        pessoa.telefone=document.getElementById("inpTelefone").value
+                    }else{
+                        alert('CPF não encontrado.')
+                    }
+                }
+            }else{
+                alert("Banco de dados vazio")
+            }
+        }
+            
+        
+
+    </script>
+</body>
+</html>

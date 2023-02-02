@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 1</title>
+</head>
+<body>
+    <input type="text" id="inpString" placeholder="Texto">
+    <button onclick="inverter()">Reverter</button> <br>
+    <output id="outString"> </output>
+    <script>
+        function inverter(){
+            //pegando a string
+            let palavra = document.getElementById('inpString').value
+            //transformando a string em array
+            let array = palavra.split('')
+            //revertendo o array
+            let arrayReverso = array.reverse()
+            //juntando o array 
+            let reversoJunto = arrayReverso.join("")
+            //exibindo o resultado
+            document.getElementById("outString").innerHTML = reversoJunto
+        }
+    </script>
+</body>
+</html>

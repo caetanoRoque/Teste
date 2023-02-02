@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 6</title>
+</head>
+<body>
+    <p>Digitar no console: criarTriangulo(n,n,n)</p>
+    <p>Exemplo: criarTriangulo(2,3,4)</p>
+    <script>
+        class Triangulo{
+            constructor(lado1,lado2,lado3){
+                this.lado1=lado1
+                this.lado2=lado2
+                this.lado3=lado3
+            }
+
+            calcularTriangulo(lado1,lado2,lado3){
+                if(Math.abs(lado1-lado2)<lado3 && lado3< (lado1+lado2) && Math.abs(lado3-lado2)<lado1 && lado1< (lado3+lado2) && Math.abs(lado1-lado3)<lado2 && lado2< (lado1+lado3)){
+                    if(lado1==lado2 && lado2==lado3){
+                        console.log("equilátero")
+                    }else if(lado1==lado2 || lado2 == lado3 || lado1 == lado3){
+                        console.log("isósceles")
+                    }else{
+                        console.log("escaleno")
+                    }
+                }else{
+                    console.log("não forma triangulo")
+                } 
+            }
+        }
+
+        function criarTriangulo(ladoA,ladoB,ladoC){
+            const tri = new Triangulo(ladoA,ladoB,ladoC)
+            tri.calcularTriangulo(tri.lado1,tri.lado2,tri.lado3)
+        }
+    </script>
+</body>
+</html>
